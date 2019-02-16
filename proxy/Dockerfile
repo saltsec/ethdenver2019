@@ -12,17 +12,14 @@ RUN tar zxvf openresty.tgz && cd openresty-* && \
 			--without-http_set_misc_module \
 			--without-http_encrypted_session_module \
 			--without-http_srcache_module \
-			# --without-http_lua_upstream_module \
             --without-http_array_var_module \
             --without-http_memc_module \
             --without-http_redis2_module \
             --without-http_redis_module \
             --without-http_rds_json_module \
             --without-http_rds_csv_module \
-            # --without-stream_lua_module \
             --without-ngx_devel_kit_module \
             --without-http_ssl_module \
-            # --without-lua_cjson \
             --without-lua_redis_parser \
             --without-lua_rds_parser \
             --without-lua_resty_dns \
@@ -74,7 +71,8 @@ RUN tar zxvf openresty.tgz && cd openresty-* && \
 	make && \
 	make install
 WORKDIR /usr/local/openresty
-#RUN rm -fr /var/tmp/openresty*
+RUN rm -fr /var/tmp/openresty*
+COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
 
-CMD ["/usr/local/openresty/bin/openresty","-c","/usr/local/openresty/conf/nginx.conf","-g","daemon off;"]
+CMD ["/usr/local/openresty/bin/openresty","-g","daemon off;"]
 

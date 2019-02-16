@@ -8,7 +8,7 @@ services:
       context: ./les-client-rpc
     networks:
       eth:
-        ipv4_address: 10.192.172.2
+        ipv4_address: 10.99.172.2
     restart: always
     stop_grace_period: 3m
     stop_signal: SIGINT
@@ -29,7 +29,7 @@ services:
       - "8545:8545"
     networks:
       eth:
-        ipv4_address: 10.192.172.3
+        ipv4_address: 10.99.172.3
     restart: always
     container_name: "openresty"
     logging:
@@ -43,4 +43,4 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 10.192.172.0/24
+        - subnet: 10.99.172.0/24
