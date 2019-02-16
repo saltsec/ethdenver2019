@@ -1,0 +1,31 @@
+---
+
+version: '2.2'
+
+services:
+  rpc:
+    build:
+      context: .
+    ports:
+      - "8545:8545"
+    networks:
+      eth:
+        ipv4_address: 10.192.172.2
+    restart: always
+    stop_grace_period: 3m
+    stop_signal: SIGINT
+    container_name: "geth-light"
+    expose:
+      - "30303"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: "10"
+
+networks:
+  eth:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.192.172.0/24
