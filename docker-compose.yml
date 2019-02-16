@@ -3,11 +3,9 @@
 version: '2.2'
 
 services:
-  rpc:
+  geth:
     build:
-      context: .
-    ports:
-      - "8545:8545"
+      context: ./les-client-rpc
     networks:
       eth:
         ipv4_address: 10.192.172.2
@@ -17,6 +15,23 @@ services:
     container_name: "geth-light"
     expose:
       - "30303"
+      - "8545"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: "10"
+
+  proxy:
+    build:
+      context: ./proxy
+    ports:
+      - "8545:8545"
+    networks:
+      eth:
+        ipv4_address: 10.192.172.3
+    restart: always
+    container_name: "openresty"
     logging:
       driver: "json-file"
       options:

@@ -31,5 +31,5 @@ WORKDIR /opt/geth
 # --bootnodes=$bootnodes --nodekeyhex=$nodekeyhex --etherbase=$etherbase
 
 ENTRYPOINT ["/bin/geth","--datadir","/opt/geth","--syncmode","light", \
-            "--rpc","--rpcaddr","0.0.0.0","--rpcapi","personal", \
+            "--rpc","--rpcaddr","0.0.0.0","--rpcapi","personal,eth,web3", \
             "--rpcvhosts","*"]
